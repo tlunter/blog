@@ -1,0 +1,18 @@
+{
+  "name": "new-blog-layout",
+  "version": "0.0.0",
+  "authors": [
+    "Todd Lunter <tlunter@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fontawesome": "~4.3.0"
+  }
+}
