@@ -1,6 +1,25 @@
+@text-color: #494c4e;
+@background-color: #fcfcfd;
+@header-h1-text-color: #2cb1d1;
+@header-h2-text-color: #6b739f;
+
+@nav-background-color: #6b739f;
+@nav-text-color: #34c0e2;
+@nav-active-background-color: #464e78;
+@nav-active-text-color: #2cb1d1;
+@nav-hover-background-color: #9da2c2;
+@nav-hover-text-color: #63d3ee;
+
+@nav-bar-width: 72px;
+
 html, body {
   margin: 0;
   padding: 0;
+
+  font-family: "Lato Light", sans-serif;
+  font-size: 16px;
+  color: @text-color;
+  line-height: 28px;
 }
 
 #container {
@@ -11,7 +30,7 @@ html, body {
   left: 0;
   right: 0;
 
-  background-color: #fcfcfd;
+  background-color: @background-color;
 
   #nav {
     position: fixed;
@@ -20,8 +39,93 @@ html, body {
     left: 0;
     bottom: 0;
 
-    background-color: #6b739f;
+    background-color: @nav-background-color;
 
-    width: 128px;
+    width: @nav-bar-width;
+
+    text-align: center;
+
+    overflow: scroll;
+
+    a {
+      width: inherit;
+    }
+
+    div {
+      display: inline-block;
+
+      padding: 20px 0;
+
+      width: inherit;
+
+      color: @nav-text-color;
+
+      &.active {
+        background-color: @nav-active-background-color;
+        color: @nav-active-text-color;
+
+        box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.24);
+      }
+
+      &.icon:hover {
+        background-color: @nav-hover-background-color;
+        color: @nav-hover-text-color;
+
+        box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.24);
+      }
+    }
   }
+
+  #content-container {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: @nav-bar-width;
+
+    overflow: scroll;
+
+    #content {
+      width: 800px;
+
+      padding: 30px;
+
+      margin: 0 auto;
+
+      @media(max-width: 932px) {
+        width: auto;
+      }
+    }
+  }
+}
+
+h1 {
+  font-family: "Lato", sans-serif;
+  font-size: 34px;
+  line-height: 40px;
+  color: @header-h1-text-color;
+
+  margin: 0;
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+}
+
+h2 {
+  font-family: "Lato Bold", sans-serif;
+  font-size: 22px;
+  line-height: 28px;
+  color: @header-h2-text-color;
+
+  margin: 0;
+}
+
+.larger-text {
+  font-family: "Lato Light", sans-serif;
+  font-size: 18px;
+  color: @text-color;
+  line-height: 28px;
 }

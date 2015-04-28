@@ -1,0 +1,19 @@
+---
+layout: post
+title:  "Oh-My-Zsh: Trials and Tribulations"
+date:   2014-02-12 21:24:00
+---
+
+If you're not new to the custom shell game, then you've probably heard of the Z shell and things like [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh) that help you set up your perfect shell.
+
+As wonderful as these projects are, it's too easy to take these community driven tools too lightly.
+
+I figured I'd use the `bundler` plugin when working on a system that I was primarily using a single version of Ruby and not something like rbenv or rvm.  Instead of providing completions or the like, it actually make a function that just causes an infinite loop.
+
+Here I am, trying to run something as simple as `bundle install` and my instance is running out of memory?  I figure perhaps the dependency graph is somehow too large (for a small website like this), and added some swap space.  The system did only have 1GB of RAM so I figured it was possible when running things like MySQLd and Redis to run out of memory.  Sure enough, same thing is happening and now the instance is swapping like crazy.  I couldn't pin it down since it seemed to be something so easy.  I figure, heck, lets remove all the gems and try again.
+
+I removed all the gems and then hit up twice and hit enter, not really thinking what I was doing.  How could I run `bundle` when I just removed it. Uh, still ran out of memory? Am I actually not hitting bundler?
+
+Well, the Oh-My-Zsh plugin added a function called `bundle` that was calling itself recursively until all my memory was gone and I never actually got to bundler.  Removing the plugin from the shell caused `bundle` to install all the gems like normal.
+
+I understand why Oh-My-Zsh is so helpful, especially for a beginner who types /bin/zsh for the first time and sees hostname% and isn't sure what the heck to do next.  I just wish when we push these things out that they're more carefully checked over!
