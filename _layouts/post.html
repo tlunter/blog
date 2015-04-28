@@ -5,12 +5,10 @@ layout: default
 
   <div class="headers">
     <h1 class="title">{{ page.title }}</h1>
-    <h2 class="date">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</span>
+    <h2 class="date">{{ page.date | date: "%b %-d, %Y" }}</h2>
   </div>
 
-  <article class="markdown-content">
     {{ content }}
-  </article>
   <div id="disqus_thread"></div>
 </div>
 <script type="text/javascript">
@@ -28,4 +26,3 @@ layout: default
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
