@@ -2,12 +2,12 @@
 layout: default
 ---
 
-    {% for post in site.posts limit:5 %}
+    {% for post in site.posts limit:3 %}
       <div class="post">
         <div class="headers">
           <h1 class="title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h1>
           <h2 class="date">{{ post.date | date: "%b %-d, %Y" }}</h2>
         </div>
-        {{ post.excerpt }}
+        {{ post.content | markdownify }}
       </div>
     {% endfor %}

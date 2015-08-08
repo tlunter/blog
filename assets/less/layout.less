@@ -12,6 +12,8 @@
 
 @nav-bar-width: 72px;
 
+@desktop-to-mobile-width: 932px;
+
 html, body {
   margin: 0;
   padding: 0;
@@ -93,7 +95,7 @@ html, body {
 
       margin: 0 auto;
 
-      @media(max-width: 932px) {
+      @media(max-width: @desktop-to-mobile-width) {
         width: auto;
       }
     }

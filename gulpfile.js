@@ -22,7 +22,6 @@ var paths = {
     './_layouts/**/*',
     './_includes/**/*',
     './index.html',
-    './about.md',
     './archive.html'
   ]
 };

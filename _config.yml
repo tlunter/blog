@@ -17,7 +17,5 @@ kramdown:
 navigation:
   - icon: home
     url: /
-  - icon: user
-    url: /about/
   - icon: archive
     url: /archive/
