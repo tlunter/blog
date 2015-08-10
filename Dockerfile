@@ -39,4 +39,4 @@ RUN npm install bower
 RUN node_modules/.bin/bower install --allow-root
 RUN node_modules/.bin/gulp jekyll-rebuild
 
-CMD nginx -g 'daemon off;' -c /opt/tlunter/blog/nginx.conf
+CMD ["nginx","-g","daemon off;","-c","/opt/tlunter/blog/nginx.conf"]
