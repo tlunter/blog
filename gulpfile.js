@@ -19,6 +19,7 @@ var paths = {
   jekyll: [
     './_config.yml',
     './_posts/**/*',
+    './_drafts/**/*',
     './_layouts/**/*',
     './_includes/**/*',
     './index.html',
