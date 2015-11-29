@@ -24,70 +24,119 @@ html, body {
   line-height: 28px;
 }
 
-#container {
-  position: absolute;
+#nav {
+  width: 100%;
 
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  background-color: @nav-background-color;
 
-  background-color: @background-color;
+  text-align: center;
 
-  #nav {
-    position: fixed;
+  text-decoration: none;
 
-    top: 0;
-    left: 0;
-    bottom: 0;
+  div#nav-content {
+    width: 800px;
 
-    background-color: @nav-background-color;
-
-    width: @nav-bar-width;
-
-    text-align: center;
-
-    overflow: scroll;
-
-    a {
-      width: inherit;
+    @media(max-width: @desktop-to-mobile-width) {
+      width: auto;
     }
 
-    div {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0 auto;
+
+    & > div {
       display: inline-block;
 
-      padding: 20px 0;
+      padding: 0;
+      margin: 0;
+    }
 
-      width: inherit;
+    div#left {
+      a {
+        text-decoration: none;
 
-      color: @nav-text-color;
+        div#name {
+          display: flex;
 
-      &.active {
-        background-color: @nav-active-background-color;
-        color: @nav-active-text-color;
+          height: 35px;
 
-        box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.24);
+          justify-content: center;
+          align-items: center;
+
+          margin: 0 0 0 5px;
+
+          color: @nav-text-color;
+
+          &:visited {
+            color: @nav-text-color;
+          }
+
+          &:hover {
+            background-color: @nav-hover-background-color;
+            color: @nav-hover-text-color;
+          }
+        }
+      }
+    }
+
+    div#right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > * {
+        margin: 0 5px;
       }
 
-      &.icon:hover {
-        background-color: @nav-hover-background-color;
-        color: @nav-hover-text-color;
+      div.separator {
+        width: 2px;
+        height: 25px;
 
-        box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.24);
+        background-color: @nav-active-background-color;
+      }
+
+      a {
+        display: inline-block;
+
+        width: 35px;
+        height: 35px;
+
+        text-decoration: none;
+
+        & > div {
+          display: flex;
+
+          height: 35px;
+
+          justify-content: center;
+          align-items: center;
+
+          color: @nav-text-color;
+
+          &.active {
+            background-color: @nav-active-background-color;
+            color: @nav-active-text-color;
+
+            box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.24);
+          }
+
+          &.icon:hover {
+            background-color: @nav-hover-background-color;
+            color: @nav-hover-text-color;
+
+            box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.24);
+          }
+        }
       }
     }
   }
+}
+
+#container {
+  background-color: @background-color;
 
   #content-container {
-    position: absolute;
-
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: @nav-bar-width;
-
-    overflow: scroll;
-
     #content {
       width: 800px;
 

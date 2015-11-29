@@ -1,16 +1,27 @@
+    <div id="nav">
+      <div id="nav-content">
+        <div id="left">
+          <a href="/">
+            <div id="name">
+              Todd Lunter
+            </div>
+          </a>
+        </div>
+        <div id="right">
+          {% for link in site.navigation %}
+            {% assign class = nil %}
+            {% if page.url == link.url %}
+              {% assign class = ' active' %}
+            {% endif %}
+            <a href="{{ link.url }}"><div class="icon{{ class }}"><i class="fa fa-{{ link.icon}}"></i></div></a>
+          {% endfor %}
+          <div class="separator"></div>
+          <a href="mailto:tlunter@gmail.com"><div class="icon"><i class="fa fa-envelope"></i></div></a>
+          <a href="https://twitter.com/tlunter"><div class="icon"><i class="fa fa-twitter"></i></div></a>
+          <a href="https://github.com/tlunter"><div class="icon"><i class="fa fa-github"></i></div></a>
+        </div>
+      </div>
+    </div>
     <div id="container">
-      <aside id="nav">
-        {% for link in site.navigation %}
-          {% assign class = nil %}
-          {% if page.url == link.url %}
-            {% assign class = ' active' %}
-          {% endif %}
-          <a href="{{ link.url }}"><div class="icon{{ class }}"><i class="fa fa-2x fa-{{ link.icon}}"></i></div></a>
-        {% endfor %}
-        <div>Todd Lunter</div>
-        <a href="mailto:tlunter@gmail.com"><div class="icon"><i class="fa fa-2x fa-envelope"></i></div></a>
-        <a href="https://twitter.com/tlunter"><div class="icon"><i class="fa fa-2x fa-twitter"></i></div></a>
-        <a href="https://github.com/tlunter"><div class="icon"><i class="fa fa-2x fa-github"></i></div></a>
-      </aside>
       <div id="content-container">
         <div id="content">
