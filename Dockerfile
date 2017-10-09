@@ -1,8 +1,7 @@
 FROM ubuntu:14.04
 
 # Install system dependencies
-RUN apt-get -y update
-RUN apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev wget git python nginx
+RUN apt-get -y update && apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev wget git python nginx
 
 # Install ruby and node
 WORKDIR /tmp/
@@ -17,14 +16,14 @@ RUN wget -q -O /tmp/ruby-2.2.2.tar.gz http://cache.ruby-lang.org/pub/ruby/2.2/ru
     rm -rf /tmp/ruby-2.2.2 /tmp/ruby-2.2.2.tar.gz
 RUN gem install bundler
 
-RUN wget -q -O /tmp/node-v0.10.29.tar.gz https://nodejs.org/dist/v0.10.29/node-v0.10.29.tar.gz && \
-    tar -xvf node-v0.10.29.tar.gz       && \
-    cd /tmp/node-v0.10.29/              && \
+RUN wget -q -O /tmp/node-v6.3.0.tar.gz https://nodejs.org/dist/v6.3.0/node-v6.3.0.tar.gz && \
+    tar -xvf node-v6.3.0.tar.gz       && \
+    cd /tmp/node-v6.3.0/              && \
     ./configure                        && \
     make                               && \
     make install                       && \
     cd /                               && \
-    rm -rf /tmp/node-v0.10.29 /tmp/node-v0.10.29.tar.gz
+    rm -rf /tmp/node-v6.3.0 /tmp/node-v6.3.0.tar.gz
 
 ENV GEM_HOME=/root/.gem
 ENV PATH=$PATH:/root/.gem/bin
