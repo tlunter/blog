@@ -1,12 +1,12 @@
 var gulp = require('gulp');
-var less = require('gulp-less');
+var lessCompile = require('gulp-less');
 var concat = require('gulp-concat');
 var webserver = require('gulp-webserver');
+var connect = require('gulp-connect');
 var flatten = require('gulp-flatten');
-var bower = require('main-bower-files');
+var mainBowerFiles = require('main-bower-files');
 var gulpFilter = require('gulp-filter');
 var cp = require('child_process');
-var runSequence = require('run-sequence');
 
 function swallowError(error) {
   console.log(error.toString());
@@ -27,25 +27,25 @@ var paths = {
   ]
 };
 
-gulp.task('less', function() {
-  gulp.src(paths.less)
+function less() {
+  return gulp.src(paths.less)
     .pipe(concat('style.css'))
-    .pipe(less())
+    .pipe(lessCompile())
     .on('error', swallowError)
     .pipe(gulp.dest('./_site/css'));
-});
+};
 
-gulp.task('fonts', function() {
-  gulp.src(paths.fonts)
+function fonts() {
+  return gulp.src(paths.fonts)
     .pipe(gulp.dest('./_site/fonts'));
-});
+};
 
-gulp.task('bower', function() {
+function bower() {
   var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf']);
   var jsFilter = gulpFilter('*.js');
   var cssFilter = gulpFilter('*.css');
 
-  gulp.src(bower())
+  return gulp.src(mainBowerFiles())
     .pipe(fontFilter)
     .pipe(flatten())
     .pipe(gulp.dest('./_site/fonts'))
@@ -58,31 +58,33 @@ gulp.task('bower', function() {
     .pipe(concat('lib.css'))
     .pipe(gulp.dest('./_site/css'))
     .pipe(cssFilter.restore());
-});
+};
 
-gulp.task('jekyll-build', function(done) {
+function jekyllBuild(done) {
   return cp.spawn('jekyll', ['build'], {stdio: 'inherit'})
     .on('close', done);
-});
+};
 
-gulp.task('jekyll-rebuild', function(callback) {
-  runSequence('jekyll-build', 'build', callback);
-});
+function serve() {
+  return connect.server({
+    host: '0.0.0.0',
+    root: '_site',
+    livereload: true
+  });
+};
 
-gulp.task('serve', function() {
-  gulp.src('./_site')
-    .pipe(webserver({
-      host: '0.0.0.0',
-      livereload: true
-    }));
-});
+function watch() {
+  gulp.watch(paths.less, less);
+  gulp.watch(paths.fonts, fonts);
+  gulp.watch(paths.jekyll, jekyllRebuild);
+};
 
-gulp.task('watch', function() {
-  gulp.watch(paths.less, ['less']);
-  gulp.watch(paths.fonts, ['fonts']);
-  gulp.watch(paths.jekyll, ['jekyll-rebuild']);
-});
+function connectReload(cb) {
+  return gulp.src('_site')
+    .pipe(connect.reload());
+}
 
-gulp.task('build', ['less', 'fonts', 'bower']);
+var build = gulp.parallel(less, fonts, bower);
+var jekyllRebuild = gulp.series(jekyllBuild, build, connectReload);
 
-gulp.task('default', ['jekyll-rebuild', 'serve', 'watch']);
+exports.default = gulp.parallel(jekyllRebuild, serve, watch);

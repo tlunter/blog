@@ -2,14 +2,20 @@
   "name": "new-blog-layout",
   "version": "0.0.0",
   "devDependencies": {
-    "gulp": "~3.8.10",
-    "gulp-concat": "~2.4.2",
+    "gulp": "~4.0",
+    "gulp-concat": "~2.6.1",
     "gulp-copy": "~0.0.2",
     "gulp-filter": "~2.0.2",
     "gulp-flatten": "~0.0.4",
     "gulp-less": "~3.3.2",
     "gulp-webserver": "~0.9.0",
+    "gulp-connect": "^5.7.0",
     "main-bower-files": "~2.7.0",
-    "run-sequence": "^1.1.0"
+    "run-sequence": "^2.2.1",
+    "bower": "^1.8.8"
+  },
+  "scripts": {
+    "start": "gulp",
+    "bower": "bower install"
   }
 }
