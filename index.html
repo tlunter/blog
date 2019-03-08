@@ -6,7 +6,6 @@ layout: default
       <div class="post">
         <div class="headers">
           <h1 class="title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h1>
-          <h2 class="date">{{ post.date | date: "%b %-d, %Y" }}</h2>
         </div>
         {{ post.content | markdownify }}
         {% unless forloop.last %}

@@ -5,10 +5,11 @@ layout: default
 
   <div class="headers">
     <h1 class="title">{{ page.title }}</h1>
-    <h2 class="date">{{ page.date | date: "%b %-d, %Y" }}</h2>
   </div>
 
     {{ content }}
+
+    <span class="date">Published on {{ page.date | date: "%b %-d, %Y" }}</span>
   <div id="disqus_thread"></div>
 </div>
 <script type="text/javascript">
