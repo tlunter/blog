@@ -11,3 +11,18 @@
       ga('send', 'pageview');
 
     </script>
+    <script>
+      function expandImage(id) {
+        var element = document.getElementById(id);
+        if (element) {
+          element.style.display = 'flex';
+        }
+      }
+
+      function closeImage(id) {
+        var element = document.getElementById(id);
+        if (element) {
+          element.style.display = '';
+        }
+      }
+    </script>

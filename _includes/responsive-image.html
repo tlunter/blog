@@ -1,3 +1,10 @@
 {% assign largest = resized | sort: 'width' | last %}
+{% capture path %}/{{ largest.dirname }}/{{largest.basename}}{% endcapture %}
+{% assign imageId = path | slugify %}
 
-<img src="/{{ largest.dirname }}/{{largest.basename}}" alt="{{ alt }}">
+<img src="{{ path }}" alt="{{ alt }}" onClick="javascript:expandImage('{{ imageId }}')">
+<div class="expanded-image" id="{{ imageId }}" onClick="javascript:closeImage('{{ imageId }}')">
+  <div class="expanded-image-container">
+    <img src="{{ path }}" alt="{{ alt }}">
+  </div>
+</div>
