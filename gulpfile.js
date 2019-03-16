@@ -33,20 +33,12 @@ function less() {
     .pipe(concat('style.css'))
     .pipe(lessCompile())
     .on('error', swallowError)
-    .pipe(gulp.dest('./_site/css'))
-    .pipe(connectReload());
-};
-
-function images() {
-  return gulp.src(paths.images)
-    .pipe(gulp.dest('./_site/images'))
-    .pipe(connectReload());
+    .pipe(gulp.dest('./_site/css'));
 };
 
 function fonts() {
   return gulp.src(paths.fonts)
-    .pipe(gulp.dest('./_site/fonts'))
-    .pipe(connectReload());
+    .pipe(gulp.dest('./_site/fonts'));
 };
 
 function bower() {
@@ -83,10 +75,10 @@ function serve() {
 };
 
 function watch() {
-  gulp.watch(paths.less, less);
-  gulp.watch(paths.fonts, fonts);
-  gulp.watch(paths.images, images);
-  gulp.watch(paths.jekyll, jekyllRebuild);
+  gulp.watch(paths.less, gulp.series(less, connectReload));
+  gulp.watch(paths.fonts, gulp.series(fonts, connectReload));
+  gulp.watch(paths.images, gulp.series(jekyllRebuild, connectReload));
+  gulp.watch(paths.jekyll, gulp.series(jekyllRebuild, connectReload));
 };
 
 function connectReload(cb) {
@@ -94,7 +86,7 @@ function connectReload(cb) {
     .pipe(connect.reload());
 }
 
-var build = gulp.parallel(less, fonts, images, bower);
-var jekyllRebuild = gulp.series(jekyllBuild, build, connectReload);
+var build = gulp.parallel(less, fonts, bower);
+var jekyllRebuild = gulp.series(jekyllBuild, build);
 
 exports.default = gulp.parallel(jekyllRebuild, serve, watch);

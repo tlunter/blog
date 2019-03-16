@@ -32,7 +32,10 @@ responsive_image:
   auto_rotate: true
   base_path: _assets/
 
-  output_path_format: _assets/images/resized/%{width}/%{basename}
+  output_path_format: images/resized/%{width}/%{basename}
+  save_to_source: false
+
+  strip: true
 
   sizes:
     - width: 1400
