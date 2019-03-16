@@ -1,41 +1,31 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 # Install system dependencies
-RUN apt-get -y update && apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev wget git python nginx
-
-# Install ruby and node
-WORKDIR /tmp/
-
-RUN wget -q -O /tmp/ruby-2.2.2.tar.gz http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz && \
-    tar -xvf ruby-2.2.2.tar.gz         && \
-    cd /tmp/ruby-2.2.2/                && \
-    ./configure --disable-install-rdoc && \
-    make -j 4                          && \
-    make -j 4 install                  && \
-    cd /                               && \
-    rm -rf /tmp/ruby-2.2.2 /tmp/ruby-2.2.2.tar.gz
+RUN apt-get -y update && apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev curl wget git python nginx ruby ruby-dev nodejs imagemagick libmagickwand-dev
+RUN curl -L https://www.npmjs.com/install.sh | sh
+RUN useradd -ms /bin/bash app
 RUN gem install bundler
 
-RUN wget -q -O /tmp/node-v6.3.0.tar.gz https://nodejs.org/dist/v6.3.0/node-v6.3.0.tar.gz && \
-    tar -xvf node-v6.3.0.tar.gz       && \
-    cd /tmp/node-v6.3.0/              && \
-    ./configure                        && \
-    make                               && \
-    make install                       && \
-    cd /                               && \
-    rm -rf /tmp/node-v6.3.0 /tmp/node-v6.3.0.tar.gz
+RUN mkdir -p /opt/tlunter/blog
+RUN chown -R app:app /opt/tlunter/blog
 
-ENV GEM_HOME=/root/.gem
-ENV PATH=$PATH:/root/.gem/bin
-RUN gem install jekyll -v 3.0.0.pre.beta8
-
-WORKDIR /
-ADD . /opt/tlunter/blog
+USER app
 
 WORKDIR /opt/tlunter/blog
-RUN npm install
-RUN npm install bower
-RUN node_modules/.bin/bower install --allow-root
-RUN node_modules/.bin/gulp jekyll-rebuild
 
+ADD Gemfile /opt/tlunter/blog/Gemfile
+ADD Gemfile.lock /opt/tlunter/blog/Gemfile.lock
+RUN bundle install --deployment
+
+ADD package.json /opt/tlunter/blog/package.json
+RUN npm install
+
+RUN npm install bower
+ADD bower.json /opt/tlunter/blog/bower.json
+RUN node_modules/.bin/bower install
+
+ADD . /opt/tlunter/blog
+RUN node_modules/.bin/gulp jekyllRebuild
+
+USER root
 CMD ["nginx","-g","daemon off;","-c","/opt/tlunter/blog/nginx.conf"]

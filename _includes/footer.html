@@ -11,3 +11,29 @@
       ga('send', 'pageview');
 
     </script>
+    <script>
+      var closeFn;
+      document.addEventListener('keydown', function(e) {
+        if (e.keyCode === 27 && closeFn) {
+          closeFn();
+        }
+      });
+
+      function expandImage(id) {
+        var element = document.getElementById(id);
+        if (element) {
+          element.style.display = 'flex';
+        }
+
+        closeFn = closeImage.bind(null, id);
+      }
+
+      function closeImage(id) {
+        var element = document.getElementById(id);
+        if (element) {
+          element.style.display = '';
+        }
+
+        closeFn = null;
+      }
+    </script>

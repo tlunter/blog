@@ -11,6 +11,11 @@ github_username:  tlunter
 markdown: kramdown
 permalink: pretty
 
+exclude:
+  - bower_components
+  - node_modules
+  - vendor
+
 kramdown:
   input: GFM
 
@@ -19,3 +24,20 @@ navigation:
     url: /
   - icon: archive
     url: /archive/
+
+plugins:
+  - jekyll-responsive-image
+
+responsive_image:
+  template: _includes/responsive-image.html
+  auto_rotate: true
+  base_path: _assets/
+
+  output_path_format: images/resized/%{width}/%{basename}
+  save_to_source: false
+
+  strip: true
+
+  sizes:
+    - width: 1400
+      quality: 100

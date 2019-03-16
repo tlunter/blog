@@ -14,8 +14,9 @@ function swallowError(error) {
 }
 
 var paths = {
-  less: './assets/less/**/*.less',
-  fonts: './assets/fonts/**/*',
+  less: './_assets/less/**/*.less',
+  fonts: './_assets/fonts/**/*',
+  images: './_assets/images/**/*',
   jekyll: [
     './_config.yml',
     './_posts/**/*',
@@ -61,7 +62,7 @@ function bower() {
 };
 
 function jekyllBuild(done) {
-  return cp.spawn('jekyll', ['build'], {stdio: 'inherit'})
+  return cp.spawn('bundle', ['exec', 'jekyll', 'build'], {stdio: 'inherit'})
     .on('close', done);
 };
 
@@ -74,9 +75,10 @@ function serve() {
 };
 
 function watch() {
-  gulp.watch(paths.less, less);
-  gulp.watch(paths.fonts, fonts);
-  gulp.watch(paths.jekyll, jekyllRebuild);
+  gulp.watch(paths.less, gulp.series(less, connectReload));
+  gulp.watch(paths.fonts, gulp.series(fonts, connectReload));
+  gulp.watch(paths.images, gulp.series(jekyllRebuild, connectReload));
+  gulp.watch(paths.jekyll, gulp.series(jekyllRebuild, connectReload));
 };
 
 function connectReload(cb) {
@@ -85,6 +87,7 @@ function connectReload(cb) {
 }
 
 var build = gulp.parallel(less, fonts, bower);
-var jekyllRebuild = gulp.series(jekyllBuild, build, connectReload);
+var jekyllRebuild = gulp.series(jekyllBuild, build);
 
+exports.jekyllRebuild = jekyllRebuild;
 exports.default = gulp.parallel(jekyllRebuild, serve, watch);
