@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "gulp",
-    "bower": "bower install"
+    "bower": "bower install",
+    "docker-build": "git archive --format tar.gz --output /dev/stdout HEAD | docker build -t blog -"
   }
 }
