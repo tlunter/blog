@@ -62,7 +62,7 @@ function bower() {
 };
 
 function jekyllBuild(done) {
-  return cp.spawn('jekyll', ['build'], {stdio: 'inherit'})
+  return cp.spawn('bundle', ['exec', 'jekyll', 'build'], {stdio: 'inherit'})
     .on('close', done);
 };
 
@@ -89,4 +89,5 @@ function connectReload(cb) {
 var build = gulp.parallel(less, fonts, bower);
 var jekyllRebuild = gulp.series(jekyllBuild, build);
 
+exports.jekyllRebuild = jekyllRebuild;
 exports.default = gulp.parallel(jekyllRebuild, serve, watch);
