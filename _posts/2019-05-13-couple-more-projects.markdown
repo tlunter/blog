@@ -13,7 +13,7 @@ date:   2019-05-13 21:45:00
     {% responsive_image path: _assets/images/ladder/done_stairs.jpg %}
   </div>
   <p>
-    In our house, we have this little shelf almost 8 feet long and 3 feet wide. Rather than put up decorations, we decided to buy a cushion and make it a little sitting nook. Unfortunately, it was also almost five feet up and completely inaccessible. I couldn't find any strong, nice ladder to put there, so I built this out of oak. It's secured at the top with two metal L brackets that I bent to match the tilt of the ladder and the rungs are dadoed into the legs.
+    In our house, we have this little shelf almost 8 feet long and 3 feet wide. Rather than put up decorations, we decided to buy a cushion and make it a little sitting nook. Unfortunately, it was also almost five feet up and completely inaccessible. I couldn't find any strong, stable ladder to put there, so I built this out of oak. It's secured at the top with two metal L brackets that I bent to match the tilt of the ladder and the rungs are dadoed into the legs.
   </p>
 </div>
 
