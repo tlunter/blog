@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var lessCompile = require('gulp-less');
 var concat = require('gulp-concat');
-var webserver = require('gulp-webserver');
 var connect = require('gulp-connect');
 var flatten = require('gulp-flatten');
 var mainBowerFiles = require('main-bower-files');
