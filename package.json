@@ -10,7 +10,7 @@
     "gulp-filter": "~2.0.2",
     "gulp-flatten": "~0.0.4",
     "gulp-less": "~4.0.1",
-    "main-bower-files": "~2.13.0",
+    "main-bower-files": "^2.13.3",
     "run-sequence": "^2.2.1"
   },
   "scripts": {

@@ -4,7 +4,8 @@ FROM ubuntu:18.04
 RUN apt-get -y update && apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev curl wget git python nginx ruby ruby-dev nodejs imagemagick libmagickwand-dev
 RUN curl -L https://www.npmjs.com/install.sh | sh
 RUN useradd -ms /bin/bash app
-RUN gem install bundler
+RUN gem update --system
+RUN gem install bundler -v 1.17.3
 
 RUN mkdir -p /opt/tlunter/blog
 RUN chown -R app:app /opt/tlunter/blog

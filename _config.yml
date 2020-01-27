@@ -15,6 +15,14 @@ exclude:
   - bower_components
   - node_modules
   - vendor
+  - bower.json
+  - Dockerfile
+  - Gemfile
+  - Gemfile.lock
+  - gulpfile.js
+  - nginx.conf
+  - package.json
+  - package-lock.json
 
 kramdown:
   input: GFM
