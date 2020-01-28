@@ -4,3 +4,5 @@ public
 _site
 .jekyll-metadata
 _assets/images/resized/
+
+*.mov
