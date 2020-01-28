@@ -6,7 +6,7 @@ date:   2020-01-27 21:30:00
 
 <div class="header photo-section">
   <div class="photos">
-    <video autoplay loop muted playsinline>
+    <video autoplay loop muted playsinline poster="/videos/bench/18-OpeningClosing001.png">
         <source src="/videos/bench/18-OpeningClosing.mov" type="video/webm">
         <source src="/videos/bench/18-OpeningClosing.mp4" type="video/mp4">
     </video>
@@ -78,7 +78,7 @@ date:   2020-01-27 21:30:00
 
 <div class="photo-section">
   <div class="photos">
-    <video autoplay loop muted playsinline>
+    <video autoplay loop muted playsinline poster="/videos/bench/15-OpeningClosing001.png">
         <source src="/videos/bench/15-OpeningClosing.mov" type="video/webm">
         <source src="/videos/bench/15-OpeningClosing.mp4" type="video/mp4">
     </video>
