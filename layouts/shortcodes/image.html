@@ -1,0 +1,10 @@
+{{ $original := .Page.Resources.GetMatch (printf "*%s*" (.Get 0)) }}
+{{ $image := $original.Resize (printf "1400x %s" (.Get 1)) }}
+{{ $imageId := $image.Permalink | base64Encode }}
+
+<img src="{{ $image.RelPermalink }}" alt="{{ $image.Title }}" width="{{ $image.Width }}" height="{{ $image.Height }}"  onClick="javascript:expandImage('{{ $imageId }}')">
+<div class="expanded-image" id="{{ $imageId }}" onClick="javascript:closeImage('{{ $imageId }}')">
+  <div class="expanded-image-container">
+    <img src="{{ $original.RelPermalink }}" alt="{{ $original.Title }}">
+  </div>
+</div>

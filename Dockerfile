@@ -1,32 +1,22 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
+ENV DEBIAN_FRONTEND="noninteractive"
+RUN apt-get update && apt-get install -y golang-go git
+RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+RUN dpkg-reconfigure --frontend noninteractive tzdata
 
-# Install system dependencies
-RUN apt-get -y update && apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev curl wget git python nginx ruby ruby-dev nodejs imagemagick libmagickwand-dev
-RUN curl -L https://www.npmjs.com/install.sh | sh
-RUN useradd -ms /bin/bash app
-RUN gem update --system
-RUN gem install bundler -v 1.17.3
+RUN useradd -d /home/app app && mkdir -p /home/app && chown app:app /home/app
+USER app
+RUN mkdir -p /home/app/src
+WORKDIR /home/app/src
 
-RUN mkdir -p /opt/tlunter/blog
-RUN chown -R app:app /opt/tlunter/blog
+RUN git clone https://github.com/gohugoio/hugo.git
+WORKDIR /home/app/src/hugo
+RUN go install --tags extended
+USER root
+RUN cp /home/app/go/bin/hugo /usr/bin/hugo
+
+RUN mkdir /home/app/repo
+RUN chown app:app /home/app/repo
 
 USER app
-
-WORKDIR /opt/tlunter/blog
-
-ADD Gemfile /opt/tlunter/blog/Gemfile
-ADD Gemfile.lock /opt/tlunter/blog/Gemfile.lock
-RUN bundle install --deployment
-
-ADD package.json /opt/tlunter/blog/package.json
-RUN npm install
-
-RUN npm install bower
-ADD bower.json /opt/tlunter/blog/bower.json
-RUN node_modules/.bin/bower install
-
-ADD . /opt/tlunter/blog
-RUN node_modules/.bin/gulp jekyllRebuild
-
-USER root
-CMD ["nginx","-g","daemon off;","-c","/opt/tlunter/blog/nginx.conf"]
+WORKDIR /home/app/repo
