@@ -2,9 +2,20 @@
 {% capture path %}{{ largest.dirname }}/{{largest.basename}}{% endcapture %}
 {% assign imageId = path | slugify %}
 
-<img src="{{ path }}" alt="{{ alt }}" onClick="javascript:expandImage('{{ imageId }}')">
+{% capture srcset %}
+{% for i in resized %}
+  /{{ i.path }} {{ i.width }}w,
+{% endfor %}
+{% endcapture %}
+
+<img src="{{ path }}" alt="{{ alt }}" title="{{ title }}" onClick="javascript:expandImage('{{ imageId }}')" srcset="{{ srcset | strip_newlines }}">
 <div class="expanded-image" id="{{ imageId }}" onClick="javascript:closeImage('{{ imageId }}')">
   <div class="expanded-image-container">
-    <img src="{{ path }}" alt="{{ alt }}">
+    <div class="expanded-image-image">
+      <img src="{{ path }}" alt="{{ alt }}" title="{{ title }}" srcset="{{ srcset | strip_newlines }}">
+    </div>
+    {% if title %}
+    <p>{{ title }}</p>
+    {% endif %}
   </div>
 </div>

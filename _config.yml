@@ -49,3 +49,5 @@ responsive_image:
   sizes:
     - width: 1400
       quality: 100
+    - width: 900
+      quality: 100
