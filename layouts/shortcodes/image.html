@@ -1,0 +1,15 @@
+{{ $original := cond .IsNamedParams (.Page.Resources.GetMatch (printf "*%s*" (.Get "src"))) (.Page.Resources.GetMatch (printf "*%s*" (.Get 0))) }}
+{{ $image := cond .IsNamedParams ($original.Resize (printf "1400x %s" (.Get "resize"))) ($original.Resize (printf "1400x %s" (.Get 1))) }}
+{{ $imageId := $image.Permalink | base64Encode }}
+
+<img src="{{ $image.RelPermalink }}" alt="{{ if .IsNamedParams }}{{ .Get "alt" }}{{ end }}" title="{{ if .IsNamedParams }}{{ .Get "title" }}{{ end }}" width="{{ $image.Width }}" height="{{ $image.Height }}"  onClick="javascript:expandImage('{{ $imageId }}')">
+<div class="expanded-image" id="{{ $imageId }}" onClick="javascript:closeImage('{{ $imageId }}')">
+  <div class="expanded-image-container">
+    <div class="expanded-image-image">
+      <img src="{{ $original.RelPermalink }}" alt="{{ if .IsNamedParams }}{{ .Get "alt" }}{{ end }}" title="{{ if .IsNamedParams }}{{ .Get "title" }}{{ end }}">
+    </div>
+    {{ if and .IsNamedParams (.Get "title") }}
+    <p>{{ .Get "title" }}</p>
+    {{ end }}
+  </div>
+</div>

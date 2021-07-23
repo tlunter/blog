@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="post">
+
+  <div class="headers">
+    <h1 class="title">{{ .Title }}</h1>
+  </div>
+
+    {{ .Content }}
+
+    <span class="date">Published on {{ .PublishDate.Format "Jan 2, 2006" }}</span>
+  <div id="disqus_thread"></div>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'tlunter';
+    var disqus_identifier = '{{ with .Page.Params.disqusId }}{{ . }}{{ else }}{{ .Page.RelPermalink }}{{ end }}';
+    var disqus_title = '{{ .Page.Title }}';
+    var disqus_url = 'https://tlunter.com{{ .Page.RelPermalink }}';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+{{ end }}

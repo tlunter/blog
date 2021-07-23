@@ -1,8 +1,9 @@
 node_modules
 bower_components
+
 public
-_site
-.jekyll-metadata
-_assets/images/resized/
+static/css
+static/fonts
+resources/_gen
 
 *.mov

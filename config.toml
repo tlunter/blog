@@ -1,0 +1,65 @@
+baseURL = "https://tlunter.com/"
+languageCode = "en-us"
+title = "tlunter.com"
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "home"
+    title = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "archive"
+    name = "archive"
+    title = "Archive"
+    url = "/posts/"
+    weight = 2
+
+[deployment]
+  [[deployment.targets]]
+    name = "s3"
+    URL = "s3://tlunter-blog?region=us-east-1"
+    cloudFrontDistributionID = "E1O88ZIC1729DZ"
+
+  [[deployment.matchers]]
+    pattern = "^.+\\.(js|css|svg|ttf|woff)$"
+    cacheControl = "max-age=31536000, no-transform, public"
+    gzip = true
+
+  [[deployment.matchers]]
+    pattern = "^.+\\.(png|jpg|JPG|mp4|webm)$"
+    cacheControl = "max-age=31536000, no-transform, public"
+    gzip = false
+
+  [[deployment.matchers]]
+    pattern = "^sitemap\\.xml$"
+    contentType = "application/xml"
+    gzip = true
+
+  [[deployment.matchers]]
+    pattern = "feed\\.xml$"
+    contentType = "application/rss+xml"
+    gzip = true
+
+  [[deployment.matchers]]
+    pattern = "^.+\\.(html|xml|json)$"
+    gzip = true
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+    style = "monokai"
+    tabWidth = 4
+
+[outputFormats]
+  [outputFormats.RSS]
+    mediatype = "application/rss"
+    baseName = "feed"

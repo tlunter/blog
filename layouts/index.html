@@ -1,0 +1,10 @@
+{{ define "main" }}
+  {{ range (first 3 (where .Site.Pages "Kind" "page")) }}
+    <div class="post">
+      <div class="headers">
+        <h1 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+      </div>
+      {{ .Content }}
+    </article>
+  {{ end }}
+{{ end }}
