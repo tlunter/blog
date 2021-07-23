@@ -1,8 +1,10 @@
 FROM ubuntu:20.04
-ENV DEBIAN_FRONTEND="noninteractive"
-RUN apt-get update && apt-get install -y golang-go git
+RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y git curl build-essential
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
+
+RUN curl -L https://golang.org/dl/go1.16.6.linux-amd64.tar.gz | tar -xz -C /usr/local
+ENV PATH="$PATH:/usr/local/go/bin"
 
 RUN useradd -d /home/app app && mkdir -p /home/app && chown app:app /home/app
 USER app
