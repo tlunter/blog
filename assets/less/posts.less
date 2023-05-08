@@ -124,6 +124,27 @@
             flex: 3;
           }
 
+          button.expanded-image-prior-image,
+          button.expanded-image-next-image {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            border: 0;
+            background-color: transparent;
+
+            font-size: 24px;
+
+            width: 30px;
+
+            margin: 10px;
+
+            @media(max-width: @desktop-to-mobile-width) {
+              display: none;
+            }
+          }
+
           p {
             flex: 1;
 

@@ -5,11 +5,13 @@
 <img src="{{ $image.RelPermalink }}" alt="{{ if .IsNamedParams }}{{ .Get "alt" }}{{ end }}" title="{{ if .IsNamedParams }}{{ .Get "title" }}{{ end }}" width="{{ $image.Width }}" height="{{ $image.Height }}"  onClick="javascript:expandImage('{{ $imageId }}')">
 <div class="expanded-image" id="{{ $imageId }}" onClick="javascript:closeImage('{{ $imageId }}')">
   <div class="expanded-image-container">
+    <button class="expanded-image-prior-image" onClick="javascript:priorImage()">&langle;</button>
     <div class="expanded-image-image">
       <img src="{{ $original.RelPermalink }}" alt="{{ if .IsNamedParams }}{{ .Get "alt" }}{{ end }}" title="{{ if .IsNamedParams }}{{ .Get "title" }}{{ end }}">
     </div>
     {{ if and .IsNamedParams (.Get "title") }}
     <p>{{ .Get "title" }}</p>
     {{ end }}
+    <button class="expanded-image-next-image" onClick="javascript:nextImage()">&rangle;</button>
   </div>
 </div>
