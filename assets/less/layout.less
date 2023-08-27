@@ -3,14 +3,12 @@
 @header-h1-text-color: #2cb1d1;
 @header-h2-text-color: #6b739f;
 
-@nav-background-color: #6b739f;
+@nav-background-color: #525a81;
 @nav-text-color: #34c0e2;
 @nav-active-background-color: #464e78;
 @nav-active-text-color: #2cb1d1;
-@nav-hover-background-color: #9da2c2;
+@nav-hover-background-color: #696c84;
 @nav-hover-text-color: #63d3ee;
-
-@nav-bar-width: 72px;
 
 @desktop-to-mobile-width: 932px;
 
@@ -22,6 +20,18 @@ html, body {
   font-size: 16px;
   color: @text-color;
   line-height: 28px;
+}
+
+a {
+  font-family: "Lato", sans-serif;
+
+  color: @nav-background-color;
+}
+
+a:visited {
+  font-family: "Lato", sans-serif;
+
+  color: @nav-hover-background-color;
 }
 
 #nav {
@@ -64,7 +74,8 @@ html, body {
           justify-content: center;
           align-items: center;
 
-          margin: 0 0 0 5px;
+          margin: 0 0 0 -5px;
+          padding: 0 10px;
 
           color: @nav-text-color;
 
@@ -75,6 +86,7 @@ html, body {
           &:hover {
             background-color: @nav-hover-background-color;
             color: @nav-hover-text-color;
+
           }
         }
       }
@@ -163,6 +175,11 @@ h1 {
     color: inherit;
     text-decoration: inherit;
   }
+
+  a:visited {
+    color: inherit;
+    text-decoration: inherit;
+  }
 }
 
 h2 {
@@ -174,6 +191,11 @@ h2 {
   margin: 0;
 
   a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  a:visited {
     color: inherit;
     text-decoration: inherit;
   }
